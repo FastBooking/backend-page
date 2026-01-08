@@ -489,49 +489,215 @@
         overflow-x: auto;
       }
     }
+
+    /* 登入頁面樣式 */
+    #login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    }
+
+    .login-container {
+    width: 100%;
+    max-width: 450px;
+    }
+
+    .login-card {
+    background: white;
+    border-radius: 20px;
+    padding: 50px 40px;
+    box-shadow: 0 10px 60px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    }
+
+    .login-form-group {
+    margin-bottom: 24px;
+    }
+
+    .login-form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 10px;
+    }
+
+    .login-form-group input {
+    width: 100%;
+    padding: 14px 18px;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: 'Noto Sans TC', sans-serif;
+    transition: all 0.3s;
+    outline: none;
+    }
+
+    .login-form-group input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(200, 159, 148, 0.1);
+    }
+
+    .login-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+    }
+
+    .login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(200, 159, 148, 0.4);
+    }
+
+    /* 登入訊息提示 */
+    #login-message {
+    padding: 12px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+    animation: slideDown 0.3s ease;
+    }
+
+    #login-message.error {
+    background: #fdeaea;
+    border: 2px solid var(--error);
+    color: #c27575;
+    }
+
+    #login-message.success {
+    background: #edf7f0;
+    border: 2px solid var(--success);
+    color: #5a9970;
+    }
+
+    @keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    }
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="header-content">
-      <div class="logo">資料管理</div>
-      <div class="user-info">
-        <span>👤 管理員</span>
-        <button class="logout-btn">登出</button>
+  <!-- 登入頁面 -->
+  <div id="login-page">
+    <div class="login-container">
+      <div class="login-card">
+        <h1 class="login-title">資料管理系統</h1>
+        <form id="login-form">
+          <div class="login-form-group">
+            <label>帳號</label>
+            <input type="text" id="username" required placeholder="請輸入帳號">
+          </div>
+          <div class="login-form-group">
+            <label>密碼</label>
+            <input type="password" id="password" required placeholder="請輸入密碼">
+          </div>
+          <div id="login-message" style="display: none;"></div>
+          <button type="submit" class="login-btn">登入</button>
+        </form>
       </div>
     </div>
-  </header>
-
-  <div class="main-layout">
-    <aside class="sidebar">
-      <div class="sidebar-title">資料管理</div>
-      <div class="menu-item active" data-section="equipment">服務專用儀器</div>
-      <div class="menu-item" data-section="beds">床位數量</div>
-      <div class="menu-item" data-section="weekdays">周休日設定</div>
-      <div class="menu-item" data-section="holidays">國定假日設定</div>
-      <div class="menu-item" data-section="schedule">醫生手術時間</div>
-    </aside>
-
-    <main class="content-area">
-      <!-- 服務專用儀器表 -->
-      <div class="content-card active" id="equipment-section">
-        <div class="card-header">
-          <h1>服務專用儀器管理</h1>
-          <p>管理各分店服務項目的專用儀器數量</p>
+  </div>  
+  <div id="main-page" style="display: none;">
+    <header class="header">
+        <div class="header-content">
+        <div class="logo">資料管理</div>
+        <div class="user-info">
+            <span>👤 管理員</span>
+            <button class="logout-btn">登出</button>
         </div>
-        <div class="card-body">
-          <div class="tabs">
-            <button class="tab active" data-tab="equipment-add">新增資料</button>
-            <button class="tab" data-tab="equipment-query">查詢資料</button>
-          </div>
+        </div>
+    </header>
 
-          <div class="tab-content active" id="equipment-add">
-            <form id="equipment-form" class="form-section">
-              <div class="form-row">
-                <div class="form-group">
-                  <label>分店</label>
-                  <select name="branch" required>
-                    <option value="">請選擇分店</option>
+    <div class="main-layout">
+        <aside class="sidebar">
+        <div class="sidebar-title">資料管理</div>
+        <div class="menu-item active" data-section="equipment">服務專用儀器</div>
+        <div class="menu-item" data-section="beds">床位數量</div>
+        <div class="menu-item" data-section="weekdays">周休日設定</div>
+        <div class="menu-item" data-section="holidays">國定假日設定</div>
+        <div class="menu-item" data-section="schedule">醫生手術時間</div>
+        </aside>
+
+        <main class="content-area">
+        <!-- 服務專用儀器表 -->
+        <div class="content-card active" id="equipment-section">
+            <div class="card-header">
+            <h1>服務專用儀器管理</h1>
+            <p>管理各分店服務項目的專用儀器數量</p>
+            </div>
+            <div class="card-body">
+            <div class="tabs">
+                <button class="tab active" data-tab="equipment-add">新增資料</button>
+                <button class="tab" data-tab="equipment-query">查詢資料</button>
+            </div>
+
+            <div class="tab-content active" id="equipment-add">
+                <form id="equipment-form" class="form-section">
+                <div class="form-row">
+                    <div class="form-group">
+                    <label>分店</label>
+                    <select name="branch" required>
+                        <option value="">請選擇分店</option>
+                        <option value="忠孝">忠孝總院</option>
+                        <option value="板橋">板橋總院</option>
+                        <option value="桃園">桃園總院</option>
+                        <option value="新竹">新竹總院</option>
+                        <option value="台中">台中總院</option>
+                        <option value="台南1">台南一總院</option>
+                        <option value="台南2">台南二總院</option>
+                        <option value="中正">中正總院</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label>服務項目</label>
+                    <select name="service" required>
+                        <option value="">請選擇服務項目</option>
+                        <option value="淨膚雷射">淨膚雷射</option>
+                        <option value="飛梭">飛梭雷射</option>
+                        <option value="皮秒雷射">皮秒雷射</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label>可用儀器數量</label>
+                    <input type="number" name="quantity" min="0" placeholder="請輸入數量" required>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">儲存資料</button>
+                    <button type="reset" class="btn btn-secondary">清除</button>
+                </div>
+                </form>
+            </div>
+
+            <div class="tab-content" id="equipment-query">
+                <div class="toolbar">
+                <select class="filter-select" id="equipment-filter">
+                    <option value="">全部分店</option>
                     <option value="忠孝">忠孝總院</option>
                     <option value="板橋">板橋總院</option>
                     <option value="桃園">桃園總院</option>
@@ -540,97 +706,70 @@
                     <option value="台南1">台南一總院</option>
                     <option value="台南2">台南二總院</option>
                     <option value="中正">中正總院</option>
-                  </select>
+                </select>
                 </div>
-                <div class="form-group">
-                  <label>服務項目</label>
-                  <select name="service" required>
-                    <option value="">請選擇服務項目</option>
-                    <option value="淨膚雷射">淨膚雷射</option>
-                    <option value="飛梭">飛梭雷射</option>
-                    <option value="皮秒雷射">皮秒雷射</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label>可用儀器數量</label>
-                  <input type="number" name="quantity" min="0" placeholder="請輸入數量" required>
-                </div>
-              </div>
-              <div class="btn-group">
-                <button type="submit" class="btn btn-primary">儲存資料</button>
-                <button type="reset" class="btn btn-secondary">清除</button>
-              </div>
-            </form>
-          </div>
 
-          <div class="tab-content" id="equipment-query">
-            <div class="toolbar">
-              <select class="filter-select" id="equipment-filter">
-                <option value="">全部分店</option>
-                <option value="忠孝">忠孝總院</option>
-                <option value="板橋">板橋總院</option>
-                <option value="桃園">桃園總院</option>
-                <option value="新竹">新竹總院</option>
-                <option value="台中">台中總院</option>
-                <option value="台南1">台南一總院</option>
-                <option value="台南2">台南二總院</option>
-                <option value="中正">中正總院</option>
-              </select>
+                <table class="data-table">
+                <thead>
+                    <tr>
+                    <th>分店</th>
+                    <th>服務項目</th>
+                    <th>可用儀器數量</th>
+                    <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="equipment-table-body">
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        <!-- 床位數量表 -->
+        <div class="content-card" id="beds-section">
+            <div class="card-header">
+            <h1>床位數量管理</h1>
+            <p>管理各分店的床位數量</p>
+            </div>
+            <div class="card-body">
+            <div class="tabs">
+                <button class="tab active" data-tab="beds-add">新增資料</button>
+                <button class="tab" data-tab="beds-query">查詢資料</button>
             </div>
 
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>分店</th>
-                  <th>服務項目</th>
-                  <th>可用儀器數量</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody id="equipment-table-body">
-                <tr>
-                  <td>忠孝總院</td>
-                  <td>淨膚雷射</td>
-                  <td>3</td>
-                  <td>
-                    <button class="action-btn btn-edit">編輯</button>
-                    <button class="action-btn btn-delete">刪除</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>板橋總院</td>
-                  <td>飛梭雷射</td>
-                  <td>2</td>
-                  <td>
-                    <button class="action-btn btn-edit">編輯</button>
-                    <button class="action-btn btn-delete">刪除</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+            <div class="tab-content active" id="beds-add">
+                <form id="beds-form" class="form-section">
+                <div class="form-row">
+                    <div class="form-group">
+                    <label>分店</label>
+                    <select name="branch" required>
+                        <option value="">請選擇分店</option>
+                        <option value="忠孝">忠孝總院</option>
+                        <option value="板橋">板橋總院</option>
+                        <option value="桃園">桃園總院</option>
+                        <option value="新竹">新竹總院</option>
+                        <option value="台中">台中總院</option>
+                        <option value="台南1">台南一總院</option>
+                        <option value="台南2">台南二總院</option>
+                        <option value="中正">中正總院</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label>床位數量</label>
+                    <input type="number" name="beds" min="0" placeholder="請輸入床位數量" required>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">儲存資料</button>
+                    <button type="reset" class="btn btn-secondary">清除</button>
+                </div>
+                </form>
+            </div>
 
-      <!-- 床位數量表 -->
-      <div class="content-card" id="beds-section">
-        <div class="card-header">
-          <h1>床位數量管理</h1>
-          <p>管理各分店的床位數量</p>
-        </div>
-        <div class="card-body">
-          <div class="tabs">
-            <button class="tab active" data-tab="beds-add">新增資料</button>
-            <button class="tab" data-tab="beds-query">查詢資料</button>
-          </div>
-
-          <div class="tab-content active" id="beds-add">
-            <form id="beds-form" class="form-section">
-              <div class="form-row">
-                <div class="form-group">
-                  <label>分店</label>
-                  <select name="branch" required>
-                    <option value="">請選擇分店</option>
+            <div class="tab-content" id="beds-query">
+                <div class="toolbar">
+                <select class="filter-select" id="beds-filter">
+                    <option value="">全部分店</option>
                     <option value="忠孝">忠孝總院</option>
                     <option value="板橋">板橋總院</option>
                     <option value="桃園">桃園總院</option>
@@ -639,77 +778,99 @@
                     <option value="台南1">台南一總院</option>
                     <option value="台南2">台南二總院</option>
                     <option value="中正">中正總院</option>
-                  </select>
+                </select>
                 </div>
-                <div class="form-group">
-                  <label>床位數量</label>
-                  <input type="number" name="beds" min="0" placeholder="請輸入床位數量" required>
-                </div>
-              </div>
-              <div class="btn-group">
-                <button type="submit" class="btn btn-primary">儲存資料</button>
-                <button type="reset" class="btn btn-secondary">清除</button>
-              </div>
-            </form>
-          </div>
 
-          <div class="tab-content" id="beds-query">
-            <div class="toolbar">
-              <select class="filter-select" id="beds-filter">
-                <option value="">全部分店</option>
-                <option value="忠孝">忠孝總院</option>
-                <option value="板橋">板橋總院</option>
-                <option value="桃園">桃園總院</option>
-                <option value="新竹">新竹總院</option>
-                <option value="台中">台中總院</option>
-                <option value="台南1">台南一總院</option>
-                <option value="台南2">台南二總院</option>
-                <option value="中正">中正總院</option>
-              </select>
+                <table class="data-table">
+                <thead>
+                    <tr>
+                    <th>分店</th>
+                    <th>床位數量</th>
+                    <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="beds-table-body">
+                    <tr>
+                    <td>忠孝總院</td>
+                    <td>5</td>
+                    <td>
+                        <button class="action-btn btn-edit">編輯</button>
+                        <button class="action-btn btn-delete">刪除</button>
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        <!-- 周休日表 -->
+        <div class="content-card" id="weekdays-section">
+            <div class="card-header">
+            <h1>周休日設定</h1>
+            <p>設定各分店的固定周休日</p>
+            </div>
+            <div class="card-body">
+            <div class="tabs">
+                <button class="tab active" data-tab="weekdays-add">新增資料</button>
+                <button class="tab" data-tab="weekdays-query">查詢資料</button>
             </div>
 
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>分店</th>
-                  <th>床位數量</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody id="beds-table-body">
-                <tr>
-                  <td>忠孝總院</td>
-                  <td>5</td>
-                  <td>
-                    <button class="action-btn btn-edit">編輯</button>
-                    <button class="action-btn btn-delete">刪除</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+            <div class="tab-content active" id="weekdays-add">
+                <form id="weekdays-form" class="form-section">
+                <div class="form-row">
+                    <div class="form-group">
+                    <label>分店</label>
+                    <select name="branch" required>
+                        <option value="">請選擇分店</option>
+                        <option value="忠孝">忠孝總院</option>
+                        <option value="板橋">板橋總院</option>
+                        <option value="桃園">桃園總院</option>
+                        <option value="新竹">新竹總院</option>
+                        <option value="台中">台中總院</option>
+                        <option value="台南1">台南一總院</option>
+                        <option value="台南2">台南二總院</option>
+                        <option value="中正">中正總院</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label>周休日（可多選）</label>
+                    <div style="border: 2px solid var(--border); border-radius: 12px; padding: 12px;">
+                        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+                        <input type="checkbox" name="weekdays" value="週一" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週一
+                        </label>
+                        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+                        <input type="checkbox" name="weekdays" value="週二" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週二
+                        </label>
+                        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+                        <input type="checkbox" name="weekdays" value="週三" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週三
+                        </label>
+                        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+                        <input type="checkbox" name="weekdays" value="週四" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週四
+                        </label>
+                        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+                        <input type="checkbox" name="weekdays" value="週五" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週五
+                        </label>
+                        <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
+                        <input type="checkbox" name="weekdays" value="週六" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週六
+                        </label>
+                        <label style="display: flex; align-items: center; cursor: pointer;">
+                        <input type="checkbox" name="weekdays" value="週日" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週日
+                        </label>
+                    </div>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">儲存資料</button>
+                    <button type="reset" class="btn btn-secondary">清除</button>
+                </div>
+                </form>
+            </div>
 
-      <!-- 周休日表 -->
-      <div class="content-card" id="weekdays-section">
-        <div class="card-header">
-          <h1>周休日設定</h1>
-          <p>設定各分店的固定周休日</p>
-        </div>
-        <div class="card-body">
-          <div class="tabs">
-            <button class="tab active" data-tab="weekdays-add">新增資料</button>
-            <button class="tab" data-tab="weekdays-query">查詢資料</button>
-          </div>
-
-          <div class="tab-content active" id="weekdays-add">
-            <form id="weekdays-form" class="form-section">
-              <div class="form-row">
-                <div class="form-group">
-                  <label>分店</label>
-                  <select name="branch" required>
-                    <option value="">請選擇分店</option>
+            <div class="tab-content" id="weekdays-query">
+                <div class="toolbar">
+                <select class="filter-select" id="weekdays-filter">
+                    <option value="">全部分店</option>
                     <option value="忠孝">忠孝總院</option>
                     <option value="板橋">板橋總院</option>
                     <option value="桃園">桃園總院</option>
@@ -718,107 +879,93 @@
                     <option value="台南1">台南一總院</option>
                     <option value="台南2">台南二總院</option>
                     <option value="中正">中正總院</option>
-                  </select>
+                </select>
                 </div>
-                <div class="form-group">
-                  <label>周休日（可多選）</label>
-                  <div style="border: 2px solid var(--border); border-radius: 12px; padding: 12px;">
-                    <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
-                      <input type="checkbox" name="weekdays" value="週一" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週一
-                    </label>
-                    <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
-                      <input type="checkbox" name="weekdays" value="週二" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週二
-                    </label>
-                    <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
-                      <input type="checkbox" name="weekdays" value="週三" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週三
-                    </label>
-                    <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
-                      <input type="checkbox" name="weekdays" value="週四" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週四
-                    </label>
-                    <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
-                      <input type="checkbox" name="weekdays" value="週五" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週五
-                    </label>
-                    <label style="display: flex; align-items: center; margin-bottom: 8px; cursor: pointer;">
-                      <input type="checkbox" name="weekdays" value="週六" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週六
-                    </label>
-                    <label style="display: flex; align-items: center; cursor: pointer;">
-                      <input type="checkbox" name="weekdays" value="週日" style="margin-right: 8px; width: 18px; height: 18px; cursor: pointer;"> 週日
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div class="btn-group">
-                <button type="submit" class="btn btn-primary">儲存資料</button>
-                <button type="reset" class="btn btn-secondary">清除</button>
-              </div>
-            </form>
-          </div>
 
-          <div class="tab-content" id="weekdays-query">
-            <div class="toolbar">
-              <select class="filter-select" id="weekdays-filter">
-                <option value="">全部分店</option>
-                <option value="忠孝">忠孝總院</option>
-                <option value="板橋">板橋總院</option>
-                <option value="桃園">桃園總院</option>
-                <option value="新竹">新竹總院</option>
-                <option value="台中">台中總院</option>
-                <option value="台南1">台南一總院</option>
-                <option value="台南2">台南二總院</option>
-                <option value="中正">中正總院</option>
-              </select>
+                <table class="data-table">
+                <thead>
+                    <tr>
+                    <th>分店</th>
+                    <th>周休日</th>
+                    <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="weekdays-table-body">
+                    <tr>
+                    <td>忠孝總院</td>
+                    <td>週一</td>
+                    <td>
+                        <button class="action-btn btn-edit">編輯</button>
+                        <button class="action-btn btn-delete">刪除</button>
+                    </td>
+                    </tr>
+                    <tr>
+                    <td>台中總院</td>
+                    <td>週一、週三</td>
+                    <td>
+                        <button class="action-btn btn-edit">編輯</button>
+                        <button class="action-btn btn-delete">刪除</button>
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        <!-- 國定假日表 -->
+        <div class="content-card" id="holidays-section">
+            <div class="card-header">
+            <h1>國定假日設定</h1>
+            <p>設定各分店的國定假日與特殊假日</p>
+            </div>
+            <div class="card-body">
+            <div class="tabs">
+                <button class="tab active" data-tab="holidays-add">新增資料</button>
+                <button class="tab" data-tab="holidays-query">查詢資料</button>
             </div>
 
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>分店</th>
-                  <th>周休日</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody id="weekdays-table-body">
-                <tr>
-                  <td>忠孝總院</td>
-                  <td>週一</td>
-                  <td>
-                    <button class="action-btn btn-edit">編輯</button>
-                    <button class="action-btn btn-delete">刪除</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>台中總院</td>
-                  <td>週一、週三</td>
-                  <td>
-                    <button class="action-btn btn-edit">編輯</button>
-                    <button class="action-btn btn-delete">刪除</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+            <div class="tab-content active" id="holidays-add">
+                <form id="holidays-form" class="form-section">
+                <div class="form-row">
+                    <div class="form-group">
+                    <label>分店</label>
+                    <select name="branch" required>
+                        <option value="">請選擇分店</option>
+                        <option value="忠孝">忠孝總院</option>
+                        <option value="板橋">板橋總院</option>
+                        <option value="桃園">桃園總院</option>
+                        <option value="新竹">新竹總院</option>
+                        <option value="台中">台中總院</option>
+                        <option value="台南1">台南一總院</option>
+                        <option value="台南2">台南二總院</option>
+                        <option value="中正">中正總院</option>
+                    </select>
+                    </div>
+                </div>
+                <div id="holiday-dates-container">
+                    <div class="form-row holiday-date-item">
+                    <div class="form-group">
+                        <label>假日日期</label>
+                        <input type="date" name="holiday_date" required>
+                    </div>
+                    <div class="form-group" style="display: flex; align-items: flex-end;">
+                        <button type="button" class="btn btn-secondary" onclick="removeHolidayDate(this)" style="padding: 14px 20px;">移除</button>
+                    </div>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary" onclick="addHolidayDate()" style="margin-bottom: 20px;">+ 新增假日日期</button>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">儲存資料</button>
+                    <button type="reset" class="btn btn-secondary">清除</button>
+                </div>
+                </form>
+            </div>
 
-      <!-- 國定假日表 -->
-      <div class="content-card" id="holidays-section">
-        <div class="card-header">
-          <h1>國定假日設定</h1>
-          <p>設定各分店的國定假日與特殊假日</p>
-        </div>
-        <div class="card-body">
-          <div class="tabs">
-            <button class="tab active" data-tab="holidays-add">新增資料</button>
-            <button class="tab" data-tab="holidays-query">查詢資料</button>
-          </div>
-
-          <div class="tab-content active" id="holidays-add">
-            <form id="holidays-form" class="form-section">
-              <div class="form-row">
-                <div class="form-group">
-                  <label>分店</label>
-                  <select name="branch" required>
-                    <option value="">請選擇分店</option>
+            <div class="tab-content" id="holidays-query">
+                <div class="toolbar">
+                <select class="filter-select" id="holidays-filter">
+                    <option value="">全部分店</option>
                     <option value="忠孝">忠孝總院</option>
                     <option value="板橋">板橋總院</option>
                     <option value="桃園">桃園總院</option>
@@ -827,85 +974,109 @@
                     <option value="台南1">台南一總院</option>
                     <option value="台南2">台南二總院</option>
                     <option value="中正">中正總院</option>
-                  </select>
+                </select>
                 </div>
-              </div>
-              <div id="holiday-dates-container">
-                <div class="form-row holiday-date-item">
-                  <div class="form-group">
-                    <label>假日日期</label>
-                    <input type="date" name="holiday_date" required>
-                  </div>
-                  <div class="form-group" style="display: flex; align-items: flex-end;">
-                    <button type="button" class="btn btn-secondary" onclick="removeHolidayDate(this)" style="padding: 14px 20px;">移除</button>
-                  </div>
-                </div>
-              </div>
-              <button type="button" class="btn btn-secondary" onclick="addHolidayDate()" style="margin-bottom: 20px;">+ 新增假日日期</button>
-              <div class="btn-group">
-                <button type="submit" class="btn btn-primary">儲存資料</button>
-                <button type="reset" class="btn btn-secondary">清除</button>
-              </div>
-            </form>
-          </div>
 
-          <div class="tab-content" id="holidays-query">
-            <div class="toolbar">
-              <select class="filter-select" id="holidays-filter">
-                <option value="">全部分店</option>
-                <option value="忠孝">忠孝總院</option>
-                <option value="板橋">板橋總院</option>
-                <option value="桃園">桃園總院</option>
-                <option value="新竹">新竹總院</option>
-                <option value="台中">台中總院</option>
-                <option value="台南1">台南一總院</option>
-                <option value="台南2">台南二總院</option>
-                <option value="中正">中正總院</option>
-              </select>
+                <table class="data-table">
+                <thead>
+                    <tr>
+                    <th>分店</th>
+                    <th>假日日期</th>
+                    <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="holidays-table-body">
+                    <tr>
+                    <td>忠孝總院</td>
+                    <td>2026-01-28, 2026-01-29, 2026-01-30</td>
+                    <td>
+                        <button class="action-btn btn-edit">編輯</button>
+                        <button class="action-btn btn-delete">刪除</button>
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+
+        <!-- 醫生手術時間表 -->
+        <div class="content-card" id="schedule-section">
+            <div class="card-header">
+            <h1>醫生手術時間管理</h1>
+            <p>設定各分店醫師的手術時間與術前術後時間</p>
+            </div>
+            <div class="card-body">
+            <div class="tabs">
+                <button class="tab active" data-tab="schedule-add">新增資料</button>
+                <button class="tab" data-tab="schedule-query">查詢資料</button>
             </div>
 
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>分店</th>
-                  <th>假日日期</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody id="holidays-table-body">
-                <tr>
-                  <td>忠孝總院</td>
-                  <td>2026-01-28, 2026-01-29, 2026-01-30</td>
-                  <td>
-                    <button class="action-btn btn-edit">編輯</button>
-                    <button class="action-btn btn-delete">刪除</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
+            <div class="tab-content active" id="schedule-add">
+                <form id="schedule-form" class="form-section">
+                <div class="form-row">
+                    <div class="form-group">
+                    <label>分店</label>
+                    <select name="branch" required>
+                        <option value="">請選擇分店</option>
+                        <option value="忠孝">忠孝總院</option>
+                        <option value="板橋">板橋總院</option>
+                        <option value="桃園">桃園總院</option>
+                        <option value="新竹">新竹總院</option>
+                        <option value="台中">台中總院</option>
+                        <option value="台南1">台南一總院</option>
+                        <option value="台南2">台南二總院</option>
+                        <option value="中正">中正總院</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                    <label>醫師</label>
+                    <input type="text" name="doctor" placeholder="請輸入醫師姓名" required>
+                    </div>
+                    <div class="form-group">
+                    <label>服務項目</label>
+                    <select name="service" required>
+                        <option value="">請選擇服務項目</option>
+                        <option value="淨膚雷射">淨膚雷射</option>
+                        <option value="飛梭">飛梭雷射</option>
+                        <option value="皮秒雷射">皮秒雷射</option>
+                        <option value="音波拉提">音波拉提</option>
+                        <option value="電波拉皮">電波拉皮</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                    <label>手術時間（分鐘）</label>
+                    <input type="number" name="surgery_time" min="0" placeholder="例如：30" required id="surgery-time-input">
+                    </div>
+                    <div class="form-group">
+                    <label>術前時間（分鐘）</label>
+                    <input type="number" name="pre_time" min="0" placeholder="例如：15" required id="pre-time-input">
+                    </div>
+                    <div class="form-group">
+                    <label>術後時間（分鐘）</label>
+                    <input type="number" name="post_time" min="0" placeholder="例如：15" required id="post-time-input">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group full-width">
+                    <label>完整服務時間（包含術前跟術後）</label>
+                    <div class="calculated-field" id="total-time-display">請先輸入手術時間、術前時間及術後時間</div>
+                    <small class="hint-text">此欄位自動計算，無需手動輸入</small>
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary">儲存資料</button>
+                    <button type="reset" class="btn btn-secondary">清除</button>
+                </div>
+                </form>
+            </div>
 
-      <!-- 醫生手術時間表 -->
-      <div class="content-card" id="schedule-section">
-        <div class="card-header">
-          <h1>醫生手術時間管理</h1>
-          <p>設定各分店醫師的手術時間與術前術後時間</p>
-        </div>
-        <div class="card-body">
-          <div class="tabs">
-            <button class="tab active" data-tab="schedule-add">新增資料</button>
-            <button class="tab" data-tab="schedule-query">查詢資料</button>
-          </div>
-
-          <div class="tab-content active" id="schedule-add">
-            <form id="schedule-form" class="form-section">
-              <div class="form-row">
-                <div class="form-group">
-                  <label>分店</label>
-                  <select name="branch" required>
-                    <option value="">請選擇分店</option>
+            <div class="tab-content" id="schedule-query">
+                <div class="toolbar">
+                <select class="filter-select" id="schedule-filter">
+                    <option value="">全部分店</option>
                     <option value="忠孝">忠孝總院</option>
                     <option value="板橋">板橋總院</option>
                     <option value="桃園">桃園總院</option>
@@ -914,100 +1085,43 @@
                     <option value="台南1">台南一總院</option>
                     <option value="台南2">台南二總院</option>
                     <option value="中正">中正總院</option>
-                  </select>
+                </select>
                 </div>
-                <div class="form-group">
-                  <label>醫師</label>
-                  <input type="text" name="doctor" placeholder="請輸入醫師姓名" required>
-                </div>
-                <div class="form-group">
-                  <label>服務項目</label>
-                  <select name="service" required>
-                    <option value="">請選擇服務項目</option>
-                    <option value="淨膚雷射">淨膚雷射</option>
-                    <option value="飛梭">飛梭雷射</option>
-                    <option value="皮秒雷射">皮秒雷射</option>
-                    <option value="音波拉提">音波拉提</option>
-                    <option value="電波拉皮">電波拉皮</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label>手術時間（分鐘）</label>
-                  <input type="number" name="surgery_time" min="0" placeholder="例如：30" required id="surgery-time-input">
-                </div>
-                <div class="form-group">
-                  <label>術前時間（分鐘）</label>
-                  <input type="number" name="pre_time" min="0" placeholder="例如：15" required id="pre-time-input">
-                </div>
-                <div class="form-group">
-                  <label>術後時間（分鐘）</label>
-                  <input type="number" name="post_time" min="0" placeholder="例如：15" required id="post-time-input">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group full-width">
-                  <label>完整服務時間（包含術前跟術後）</label>
-                  <div class="calculated-field" id="total-time-display">請先輸入手術時間、術前時間及術後時間</div>
-                  <small class="hint-text">此欄位自動計算，無需手動輸入</small>
-                </div>
-              </div>
-              <div class="btn-group">
-                <button type="submit" class="btn btn-primary">儲存資料</button>
-                <button type="reset" class="btn btn-secondary">清除</button>
-              </div>
-            </form>
-          </div>
 
-          <div class="tab-content" id="schedule-query">
-            <div class="toolbar">
-              <select class="filter-select" id="schedule-filter">
-                <option value="">全部分店</option>
-                <option value="忠孝">忠孝總院</option>
-                <option value="板橋">板橋總院</option>
-                <option value="桃園">桃園總院</option>
-                <option value="新竹">新竹總院</option>
-                <option value="台中">台中總院</option>
-                <option value="台南1">台南一總院</option>
-                <option value="台南2">台南二總院</option>
-                <option value="中正">中正總院</option>
-              </select>
+                <table class="data-table">
+                <thead>
+                    <tr>
+                    <th>分店</th>
+                    <th>醫師</th>
+                    <th>服務項目</th>
+                    <th>手術時間</th>
+                    <th>術前時間</th>
+                    <th>術後時間</th>
+                    <th>完整服務時間</th>
+                    <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="schedule-table-body">
+                    <tr>
+                    <td>忠孝總院</td>
+                    <td>王醫師</td>
+                    <td>淨膚雷射</td>
+                    <td>30 分鐘</td>
+                    <td>15 分鐘</td>
+                    <td>15 分鐘</td>
+                    <td>60 分鐘</td>
+                    <td>
+                        <button class="action-btn btn-edit">編輯</button>
+                        <button class="action-btn btn-delete">刪除</button>
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
             </div>
-
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>分店</th>
-                  <th>醫師</th>
-                  <th>服務項目</th>
-                  <th>手術時間</th>
-                  <th>術前時間</th>
-                  <th>術後時間</th>
-                  <th>完整服務時間</th>
-                  <th>操作</th>
-                </tr>
-              </thead>
-              <tbody id="schedule-table-body">
-                <tr>
-                  <td>忠孝總院</td>
-                  <td>王醫師</td>
-                  <td>淨膚雷射</td>
-                  <td>30 分鐘</td>
-                  <td>15 分鐘</td>
-                  <td>15 分鐘</td>
-                  <td>60 分鐘</td>
-                  <td>
-                    <button class="action-btn btn-edit">編輯</button>
-                    <button class="action-btn btn-delete">刪除</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            </div>
         </div>
-      </div>
-    </main>
+        </main>
+    </div>
   </div>
 
   <script src="be.js"></script>
